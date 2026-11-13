@@ -8,7 +8,7 @@ export class CommunicationLayer {
   }
 
   getProducts(): Promise<IProductsResponse> {
-    return this.api.get<IProductsResponse>('/api/weblarek/product/');
+    return this.api.get<IProductsResponse>('/product/');
   }
 
   postOrder(data: IOrder): Promise<IOrderResult> {

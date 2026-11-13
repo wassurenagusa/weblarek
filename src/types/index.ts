@@ -21,9 +21,7 @@ export interface IBuyer {
   phone: string;
 }
 
-export interface IFormErrors {
-  [key: string]: string;
-}
+export type FormErrors = Partial<Record<keyof IBuyer, string>>;
 
 export interface IProductsResponse {
   total: number;

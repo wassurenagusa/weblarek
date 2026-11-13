@@ -1,73 +1,75 @@
-import { IBuyer, IFormErrors } from '../../types/index';
+import { IBuyer, FormErrors } from '../../types/index';
+
+type TPayment = 'card' | 'cash' | '';
 
 export class BuyerModel {
-  _payment: 'card' | 'cash' | '';
-  _address: string;
-  _email: string;
-  _phone: string;
+  private payment: TPayment;
+  private address: string;
+  private email: string;
+  private phone: string;
 
   constructor () {
-    this._payment = '';
-    this._address = '';
-    this._email = '';
-    this._phone = '';
+    this.payment = '';
+    this.address = '';
+    this.email = '';
+    this.phone = '';
   }
 
   // сохраняет переданные данные
   setData(data: Partial<IBuyer>): void {
     if (data.payment !== undefined) {
-      this._payment = data.payment;
+      this.payment = data.payment;
     }
 
     if (data.address !== undefined) {
-      this._address = data.address;
+      this.address = data.address;
     }
 
     if (data.email !== undefined) {
-      this._email = data.email;
+      this.email = data.email;
     }
 
     if (data.phone !== undefined) {
-      this._phone = data.phone;
+      this.phone = data.phone;
     }
   }
 
   // возвращает данные покупателя
   getData(): IBuyer {
     return {
-      payment: this._payment,
-      address: this._address,
-      email: this._email,
-      phone: this._phone
+      payment: this.payment,
+      address: this.address,
+      email: this.email,
+      phone: this.phone
     }
   }
 
   // сбрасывает данные (используется после успешного заказа)
   clear(): void {
-    this._payment = '';
-    this._address = '';
-    this._email = '';
-    this._phone = '';
+    this.payment = '';
+    this.address = '';
+    this.email = '';
+    this.phone = '';
   }
 
   // проверяет корректность данных и возвращает объект с ошибками;
   // пустой объект означает, что данные валидны
-  validate(): IFormErrors {    
-    const errors: IFormErrors = {};
+  validate(): FormErrors {    
+    const errors: FormErrors = {};
 
-    if (!this._payment) {
+    if (!this.payment) {
       errors.payment = 'Не выбран вид оплаты';
     }
 
-    if (!this._address) {
+    if (!this.address) {
       errors.address = 'Укажите адрес доставки';
     }
 
-    if (!this._email) {
+    if (!this.email) {
       errors.email = 'Укажите емэйл';
     }
 
-    if (!this._phone) {
+    if (!this.phone) {
       errors.phone = 'Укажите телефон';
     }
 
